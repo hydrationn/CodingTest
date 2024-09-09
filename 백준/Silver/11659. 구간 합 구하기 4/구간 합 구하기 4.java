@@ -27,7 +27,7 @@ public class Main {
       int start = Integer.parseInt(st.nextToken());
       int end = Integer.parseInt(st.nextToken());
 
-      System.out.println(intArr[end]-intArr[start-1]);
+      bw.write(intArr[end]-intArr[start-1] + "\n");
     }
 
     br.close();
