@@ -42,28 +42,39 @@ public class Main {
     // 최빈값: N개의 수들 중 가장 많이 나타나는 값 -> 여러 개 있을 때에는 최빈값 중 두 번째로 작은 값
     Map<Integer, Integer> intMap = new HashMap<>();
 
-    // 원소와 빈도수 설정
+    // 원소와 원소의 개수 값 setting(intMap, reverseIntMAp)
     for (int i = 0; i < N; i++) {
-      intMap.put(intArr[i], intMap.getOrDefault(intArr[i], 0) + 1);
-    }
-
-    // 가장 높은 빈도를 찾기
-    int maxFrequency = Collections.max(intMap.values());
-
-    // 최빈값 리스트 생성
-    List<Integer> modeList = new ArrayList<>();
-    for (Map.Entry<Integer, Integer> entry : intMap.entrySet()) {
-      if (entry.getValue() == maxFrequency) {
-        modeList.add(entry.getKey());
+      if (intMap.containsKey(intArr[i])) {
+        intMap.replace(intArr[i], intMap.get(intArr[i])+1);
+      } else {
+        intMap.put(intArr[i], 1);
       }
     }
 
-    // 정렬하여 최빈값 중 두 번째로 작은 값 찾기
-    Collections.sort(modeList);
-    if (modeList.size() > 1) {
-      System.out.println(modeList.get(1));  // 두 번째로 작은 최빈값
+    // medianMin 값 setting
+    int medianMaxCnt = 0;
+    for (int i = 0; i < N; i++) {
+      if (medianMaxCnt < intMap.get(intArr[i])) {
+        medianMaxCnt = intMap.get(intArr[i]);
+      }
+    }
+
+    // medianMaxCnt가 최대인 값들을 medianSearchList에 add시켜 조건에 맞는 median이 될 후보 만들기
+    List<Integer> medianSearchList = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      if (intMap.get(intArr[i]).equals(medianMaxCnt) && !medianSearchList.contains(intArr[i])) {
+        medianSearchList.add(intArr[i]);
+      }
+    }
+    Collections.sort(medianSearchList);
+
+    // case 1 : 최빈값이 2개 이상인 경우
+    // case 2 : 최빈값이 단 하나인 경우
+    int second;
+    if (medianSearchList.size() >= 2) {
+      System.out.println(medianSearchList.get(1));
     } else {
-      System.out.println(modeList.get(0));  // 최빈값이 하나일 경우
+      System.out.println(medianSearchList.get(0));
     }
 
     // 범위: N개의 수들 중 최댓값과 최솟값의 차이
