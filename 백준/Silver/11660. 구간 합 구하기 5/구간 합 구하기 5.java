@@ -11,10 +11,11 @@ public class Main {
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     StringTokenizer st = new StringTokenizer(br.readLine());
 
-    StringBuilder sb = new StringBuilder();
     int n = Integer.parseInt(st.nextToken());
     int m = Integer.parseInt(st.nextToken());
+      
     int[][] dp = new int[n+1][n+1];
+      
     for (int i = 1; i <= n; i++) {
       st = new StringTokenizer(br.readLine());
       for (int j = 1; j <= n; j++) {
@@ -22,16 +23,22 @@ public class Main {
       }
     }
 
+    StringBuilder sb = new StringBuilder();
+      
     for (int k = 1; k <= m; k++) {
       int sum = 0;
+        
       st = new StringTokenizer(br.readLine());
+        
       int x1 = Integer.parseInt(st.nextToken());
       int y1 = Integer.parseInt(st.nextToken());
       int x2 = Integer.parseInt(st.nextToken());
       int y2 = Integer.parseInt(st.nextToken());
+        
       for (int i = x1; i <= x2; i++) {
         sum = sum + (dp[i][y2] - dp[i][y1-1]);
       }
+        
       sb.append(sum + "\n");
     }
     bw.write(sb.toString());
