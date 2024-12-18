@@ -19,46 +19,30 @@ public class Main {
       intArr[i] = Integer.parseInt(st.nextToken());
     }
 
-    while (true) {
+    while (!(intArr[1] == 1 && intArr[2] == 2 && intArr[3] == 3 && intArr[4] == 4 && intArr[5] == 5)) {
       // 1. 첫 번째 조각의 수가 두 번째 수보다 크다면, 둘의 위치를 서로 바꾼다.
       if (intArr[1] > intArr[2]) {
-        int temp = intArr[1];
-        intArr[1] = intArr[2];
-        intArr[2] = temp;
-
+        change(intArr, 1, 2);
         print(intArr);
       }
 
       // 2. 두 번째 조각의 수가 세 번째 수보다 크다면, 둘의 위치를 서로 바꾼다.
       if (intArr[2] > intArr[3]) {
-        int temp = intArr[2];
-        intArr[2] = intArr[3];
-        intArr[3] = temp;
-
+        change(intArr, 2, 3);
         print(intArr);
       }
 
       // 3. 세 번째 조각의 수가 네 번째 수보다 크다면, 둘의 위치를 서로 바꾼다.
       if (intArr[3] > intArr[4]) {
-        int temp = intArr[3];
-        intArr[3] = intArr[4];
-        intArr[4] = temp;
-
+        change(intArr, 3, 4);
         print(intArr);
       }
 
       // 4. 네 번째 조각의 수가 다섯 번째 수보다 크다면, 둘의 위치를 서로 바꾼다.
       if (intArr[4] > intArr[5]) {
-        int temp = intArr[4];
-        intArr[4] = intArr[5];
-        intArr[5] = temp;
-
+        change(intArr, 4, 5);
         print(intArr);
       }
-
-      // 5. 만약 순서가 1, 2, 3, 4, 5 순서가 아니라면 1 단계로 다시 간다.
-      if (intArr[1] == 1 && intArr[2] == 2 && intArr[3] == 3 && intArr[4] == 4 && intArr[5] == 5)
-        break;
     }
     bw.write(sb.toString());
 
@@ -72,5 +56,11 @@ public class Main {
       sb.append(intArr[i]).append(" ");
     };
     sb.append("\n");
+  }
+  
+  public static void change(int[] intArr, int i, int j) {
+    int temp = intArr[i];
+    intArr[i] = intArr[j];
+    intArr[j] = temp;
   }
 }
