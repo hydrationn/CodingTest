@@ -17,6 +17,17 @@ public class Main {
     long quotient = A / B;
     long remainder = A % B;
 
+    // 나머지 조건 조정
+    if (remainder < 0) {
+      if (B > 0) {
+        remainder += B;
+        quotient -= 1;
+      } else {
+        remainder -= B;
+        quotient += 1;
+      }
+    }
+
     bw.write(quotient + " " + remainder + "\n");
 
     br.close();
